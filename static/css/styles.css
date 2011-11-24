@@ -1,0 +1,179 @@
+
+
+body {
+  background-color: #f6f6f6;
+  font-family: Helvetica, Arial, sans-serif;
+  border: none;
+  margin: 0;
+  padding: 0;	
+}
+
+.super {
+  width: 900px;
+  float: left;
+  margin-left: 50%;
+  position: relative;
+  left: -450px;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+  color: #d95700;	
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  line-height: 1.6em;
+  font-size: 14px;	
+}
+
+h2 {
+  color: #d95700;	
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;	
+}
+
+form {
+  width: 600px;	
+}
+
+form p {
+  width: 100%;
+}
+
+form label {
+  font-weight: bold;
+  font-size: 0.9em;
+  width: 200px;
+  float: left;	
+  position: relative;
+  top: 12px;
+}
+
+form input {
+  border: 1px solid #e1e1e1;
+  padding: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;	
+  width: 400px;
+}
+
+form textarea {
+  border: 1px solid #e1e1e1;
+  padding: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  width: 400px;
+  line-height: 1.5em;	
+}
+
+form input.submit {
+  font-size: 1.6em;
+  font-weight: bold;	
+}
+
+.button {
+	background-color: #f1f1f1;
+    /* Firefox 3.6+ */ 
+    background: -moz-linear-gradient(100% 100% 90deg, #e6e6e6, #f1f1f1); 
+    
+    /* Safari 4-5, Chrome 1-9 */ /* -webkit-gradient(<type>, <point> [, <radius>]?, <point> [, <radius>]? [, <stop>]*) */ 
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f1f1f1), to(#e6e6e6)); 
+    
+    /* Safari 5.1+, Chrome 10+ */ 
+    background: -webkit-linear-gradient(#e6e6e6, #f1f1f1); 
+    
+    /* Opera 11.10+ */ 
+    background: -o-linear-gradient(#e6e6e6, #f1f1f1);   
+    
+    border: 1px solid #fff;
+    box-shadow: 0 1px 1px #c1c1c1, 0 1px 0px #f6f6f6;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 10px 15px 7px;
+    text-shadow: 0 1px 1px #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.button:hover {
+	box-shadow: 0 1px 2px #999, 0 1px 0px #f6f6f6;
+}
+
+input.button {
+  color: #d95700;
+  height: auto;	
+}
+
+input.button:hover {
+  text-decoration: underline;	
+}
+
+
+#header {
+  background-color: #F7F7F2;
+  width: 100%;
+  float: left;
+  height: 70px;
+  box-shadow: 0 1px 3px #e1e1e1;
+  margin-bottom: 30px;	
+}
+
+
+ul#nav {
+  list-style-type: none;
+  float: left;	
+  width: 100%;
+  font-weight: bold;
+  margin: 25px 0 0 0;
+}
+
+ul#nav li {
+  display: inline;	
+  margin-right: 20px;
+  font-size: 0.8em;
+}
+
+ul#nav li a {
+  text-shadow: 0 1px 1px #fff;	
+}
+
+ul#nav li a.selected {
+  color: #000;	
+}
+
+ul#nav li.sitename {
+  font-size: 1.6em;	
+}
+
+ul#nav li.sitename a {
+  color: #000;	
+}
+
+ol#newslist {
+  margin-left: 20px;
+  color: #999;
+  	
+}
+
+#newslist li {
+  margin-bottom: 20px;
+  width: auto;
+  line-height: 1.2em;
+}
+
+.small {
+  font-size: 0.7em;
+}
+
+.small a, a.small {
+  color: #999;	
+}
+
+div#add_button {position: absolute; right: 0; top: 25px; }

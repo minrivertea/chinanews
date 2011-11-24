@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load django_static %}
+
+{% block pagetitle %}Add news{% endblock %}
+
+{% block content %}
+
+<p>You can just add a URL (ie. if you're linking to another site) or add just text if it's a discussion. Either way, you have to add a title.</p>
+
+<form action="." method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<input class="button" type="submit" value="Submit">
+</form>
+
+{% endblock %}

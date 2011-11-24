@@ -1,0 +1,20 @@
+{% extends "registration/base_registration.html" %}
+
+
+{% block title %}Register for an account{% endblock %}
+{% block body_class %}{{ block.super }} registration_form{% endblock %}
+
+
+{% block content_title %}
+  <h2>Register for an account</h2>
+{% endblock %}
+
+
+{% block content %}
+	<h2>Signup for {{ sitename }}</h2>
+	<p>Signing up allows you to post news, questions and answers, and vote. We don't spam you, and we'll never sell or pass on your information.</p>
+  <form action="." method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <p class="submit"><input class="button" type="submit" value="Submit"></p>
+  </form>
+{% endblock %}

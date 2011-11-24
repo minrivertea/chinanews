@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load django_static comments %}
+
+{% block pagetitle %}News{% endblock %}
+
+{% block extracss %}
+<style type="text/css">
+span.votes {font-weight: bold; color: #666;}
+
+.ding a:link, .ding a:visited {
+    background-color: #e1e1e1;
+    color: #666;
+    display: block;
+    float: left;
+    font-weight: 900;
+    height: 8px;
+    margin-right: 5px;
+    padding: 0 4px 7px;
+    position: relative;
+    top: 2px;
+    width: 7px;
+}
+
+.ding a:hover {
+  background-color: #D95700;
+  color: #fff;
+  text-decoration: none;
+}
+
+</style>
+{% endblock %}
+
+{% block addbutton %}
+<a class="button" href="{% url add_news %}">Add News</a>
+{% endblock %}
+
+{% block content %}
+
+<ol id="newslist">
+{% for n in news %}
+<li>
+
+	{% if n.url %}<a href="{{ n.url }}">{{ n }}</a>{% else %}{{ n }}{% endif %}
+	
+	<br/>
+	<span class="small">
+		{% if request.user.get_profile in n.voters.all %}{% else %}<span class="ding"><a href="{% url news_ding n.hashkey %}">^</a></span>{% endif %}
+		<span class="votes">{{ n.votes }} point{{ n.votes|pluralize }}</span> -
+		<a href="{% url profile n.owner.user.username %}">{{ n.owner }}</a> - 
+		{% get_comment_count for n as comments_count %}
+		{% if comments_count %}
+		<a href="{% url news_item n.hashkey %}">{{ comments_count }} comment{{ comments_count|pluralize }}</a> - 
+		{% else %}
+		<a href="{% url news_item n.hashkey %}">Discuss</a> - 
+		{% endif %}
+		{{ n.date|timesince }} ago
+		
+		
+	</span>
+</li>
+{% endfor %}
+</ol>
+
+
+{% endblock %}

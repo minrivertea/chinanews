@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load django_static %}
+
+
+
+{% block content %}
+
+<h1>{{ person }}</h1>
+
+<p>{{ person.bio }}</p>
+
+<p>{{ person.karma }} point{{ person.karma|pluralize }}</p>
+
+{% endblock %}

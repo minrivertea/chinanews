@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% load django_static comments %}
+
+{% block pagetitle %}{{ news_item.title }}{% endblock %}
+
+{% block extracss %}
+<style type="text/css">
+input.hidden, input#id_honeypot, input#id_timestamp, input#id_content_type, input#id_object_pk {
+  display: none;	
+}
+
+form {margin-top: 20px; width: 900px; float: left;}
+label {float: right; margin-left: 20px;}
+textarea {float: left; margin: 0 20px 20px 0;}
+input.button {width: 200px;}
+
+ul#comment-list {
+  float: left;
+  margin: 50px 0 0 0;
+  padding: 30px 0 0 0;
+  border-top: 3px dotted #e1e1e1;
+  list-style-type: none;
+  margin-bottom: 50px;	
+}
+
+ul#comment-list li {
+  font-size: 0.9em;
+  line-height: 1.5em;
+  color: #666;	
+  margin-bottom: 20px;
+}
+
+ul#comment-list li .meta {
+  color: #333;
+  font-size: 12px;
+  font-weight: bold;	
+}
+
+.ding a:link, .ding a:visited {
+    background-color: #e1e1e1;
+    color: #666;
+    display: block;
+    float: left;
+    font-weight: 900;
+    height: 8px;
+    margin-right: 5px;
+    padding: 0 4px 7px;
+    position: relative;
+    top: 2px;
+    width: 7px;
+}
+
+.ding a:hover {
+  background-color: #D95700;
+  color: #fff;
+  text-decoration: none;
+}
+
+p.note {
+  margin-top: 0;	
+}
+
+</style>
+{% endblock %}
+
+{% block addbutton %}
+<a class="button" href="{% url add_news %}">Add News</a>
+{% endblock %}
+
+{% block content %}
+
+
+<h2>{{ news_item.title }}</h2>
+<p class=""><a href="{{ news_item.url }}">{{ news_item.url }}</a></p>
+
+{% if news_item.text %}<p>{{ news_item.text }}</p>{% endif %}
+
+{% if request.user.is_authenticated %}
+	{% get_comment_form for news_item as form %}
+	<form action="{% comment_form_target %}" method="post">
+	{% csrf_token %}
+	
+	<textarea id="id_comment" rows="5" cols="30" name="comment"></textarea>
+	<p class="note"><strong>&laquo; Add your comment</strong><br/>Please stick to the guidelines, no trolling, flaming or racist language please.</p>
+	<input class="hidden" id="id_name" type="text" value="{{ request.user.get_profile.user.username }}" name="name" maxlength="50" />
+	<input class="hidden" type="text" name="email" id="id_email" value="{{ request.user.get_profile.email }}" />
+	<input class="hidden" type="text" name="url" id="id_url" value="{{ siteurl }}" />
+	{{ form.honeypot }}
+	{{ form.content_type }}
+	{{ form.object_pk }}
+	{{ form.timestamp }}
+	{{ form.security_hash }}
+	
+	<input type="submit" value="Submit" class="button">
+	
+	</form>
+{% else %}
+<p><strong><a href="{% url auth_login %}">Login</a> or <a href="{% url registration_register %}">signup</a> to post comments</strong></p>
+{% endif %}
+
+{% get_comment_list for news_item as comment_list %}
+<ul id="comment-list">
+{% for comment in comment_list %}
+	<li>
+		{{ comment.comment }}<br/>
+		<span class="meta">
+			{% if request.user.get_profile in comment.voters.all %}{% else %}
+				<span class="ding"><a href="{% url comment_ding comment.id %}">^</a></span>
+			{% endif %}
+			<span class="votes">{{ comment.votes }} point{{ comment.votes|pluralize }}</span> -
+			<a href="{% url profile comment.user_name %}">{{ comment.user_name }}</a> - 
+			{{ comment.submit_date|timesince }} ago
+		</span>
+	</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
