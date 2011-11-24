@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load django_static %}
+
+{% block extracss %}
+<style type="text/css">
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<h1>{{ person }}'s posts (all)</h1>
+
+<p class="small"><a href="{% url profile person.user.username %}">&larr; back to {{ person }}'s profile</a></p>
+
+<ul>
+{% for p in posts %}
+	<li><a href="{% url news_item p.hashkey %}">{{ p.title }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
