@@ -8,3 +8,9 @@ from users.models import Person
 def profile(request, slug):
     person = get_object_or_404(Person, user__username=slug)
     return render(request, "users/profile.html", locals())
+    
+def all_posts(request, slug):
+    person = get_object_or_404(Person, user__username=slug)
+    from news.models import NewsItem
+    posts = NewsItem.objects.filter(owner=person).order_by('-date')
+    return render(request, "users/all_posts.html", locals())

@@ -10,6 +10,13 @@
 
 <p>{{ person.bio }}</p>
 
-<p>{{ person.karma }} point{{ person.karma|pluralize }}</p>
+<p><strong>Karma:</strong> {{ person.karma }} point{{ person.karma|pluralize }}</p>
 
+
+<p><strong>{% ifequal person request.user.get_profile %}Your{% else %}{{ person }}'s{% endifequal %} posts (latest 5) - <a href="{% url all_posts person.user.username %}">See all</a></strong></p>
+<ul>
+{% for p in person.get_latest_posts %}
+	<li><a href="{% url news_item p.hashkey %}">{{ p.title }}</a></li>
+{% endfor %}
+</ul>
 {% endblock %}

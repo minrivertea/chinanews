@@ -19,6 +19,11 @@ class Person(models.Model):
     
     def __unicode__(self):
         return self.user.username
+        
+    def get_latest_posts(self):
+        from news.models import NewsItem
+        posts = NewsItem.objects.filter(owner=self)[:5]
+        return posts
 
 
     
