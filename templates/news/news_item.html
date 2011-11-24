@@ -91,6 +91,7 @@ p.note {
 	{{ form.object_pk }}
 	{{ form.timestamp }}
 	{{ form.security_hash }}
+	<input type="hidden" class="hidden" name="next" value="{% url news_item news_item.hashkey %}" />
 	
 	<input type="submit" value="Submit" class="button">
 	
