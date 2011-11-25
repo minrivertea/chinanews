@@ -116,6 +116,7 @@ DEFAULT_FROM_EMAIL = "mail@chinanews.com"
 SITE_NAME = "wheninchina.com"
 SITE_URL = "http://www.wheninchina.com"
 
+GA_IS_ON = True
 
 # django-static info
 DJANGO_STATIC = True
