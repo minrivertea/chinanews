@@ -70,7 +70,7 @@
 	   		<li><a {% if '/profile/' in request.path %}class="selected"{% endif %} href="{% url profile request.user.username %}">Profile</a></li>
 	   		<li><a href="{% url auth_logout %}">Logout</a></li>
 	   		{% else %}
-			<li><a href="{% url registration_register %}">Signup</a> / <a href="{% url auth_login %}">Login</a></li>
+			<li><a {% if '/register/' in request.path %}class="selected"{% endif %} href="{% url registration_register %}">Signup</a> / <a href="{% url auth_login %}" {% if '/login/' in request.path %}class="selected"{% endif %}>Login</a></li>
 			{% endif %}
 			<li><a {% if '/news/' in request.path %}class="selected"{% endif %} href="{% url news_home %}">News</a></li>
 			<li><a {% if '/questions/' in request.path %}class="selected"{% endif %} href="{% url questions_home %}">Questions</a></li>
