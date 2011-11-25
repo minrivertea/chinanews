@@ -98,7 +98,7 @@ def add_news(request):
             }
             
             new_object = NewsItem.objects.create(**creation_args)
-            url = reverse('home')
+            url = reverse('news_home')
             return HttpResponseRedirect(url)
     
     else:

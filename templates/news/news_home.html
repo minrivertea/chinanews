@@ -45,7 +45,11 @@ span.votes {font-weight: bold; color: #666;}
 	
 	<br/>
 	<span class="small">
-		{% if request.user.get_profile in n.voters.all %}{% else %}<span class="ding"><a href="{% url news_ding n.hashkey %}">^</a></span>{% endif %}
+		{% if request.user.is_authenticated %}
+		{% if request.user.get_profile in n.voters.all %}{% else %}
+			<span class="ding"><a href="{% url news_ding n.hashkey %}">^</a></span>
+		{% endif %}
+		{% endif %}
 		<span class="votes">{{ n.votes }} point{{ n.votes|pluralize }}</span> -
 		<a href="{% url profile n.owner.user.username %}">{{ n.owner }}</a> - 
 		{% get_comment_count for n as comments_count %}

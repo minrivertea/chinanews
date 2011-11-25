@@ -69,7 +69,7 @@ p.note {
 <input type="submit" value="Submit answer" class="button">
 </form>
 {% else %}
-<p><a href="{% url auth_login %}">Login</a> or <a href="{% url registration_register %}">signup</a> to post an answer</p>
+<p><strong><a href="{% url auth_login %}">Login</a> or <a href="{% url registration_register %}">signup</a> to post an answer.</strong></p>
 {% endif %}
 
 
@@ -81,8 +81,10 @@ p.note {
 	<li class="">
 		<p>{{ answer.answer }}</p>
 		<span class="small">
+			{% if request.user.is_authenticated %}
 			{% if request.user.get_profile in answer.voters.all %}{% else %}
 				<span class="ding"><a href="{% url answer_vote answer.id %}">^</a></span>
+			{% endif %}
 			{% endif %}
 			<span class="votes">{{ answer.votes }} point{{ answer.votes|pluralize }}</span> -
 			<strong>Answered by <a href="{% url profile answer.owner.user.username %}">{{ answer.owner.user.username }}</a></strong> - 
