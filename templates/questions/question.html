@@ -10,7 +10,13 @@ ul#answerlist {
 }
 
 ul#answerlist li {
-  margin-bottom: 20px;	
+  margin-bottom: 30px;
+  border-bottom: 3px dotted #e1e1e1;
+  padding-bottom: 30px;	
+}
+
+#answerlist li p {
+  margin-bottom: 5px;	
 }
 
 form {margin-top: 10px; width: 800px; float: left; padding: 20px 20px 0px 20px; background-color: #e1e1e1; margin-bottom: 30px;}
@@ -19,6 +25,26 @@ textarea {float: left; margin: 0 20px 20px 0;}
 input.button {width: 200px;}
 p.note {
   margin-top: 0;	
+}
+
+.ding a:link, .ding a:visited {
+    background-color: #e1e1e1;
+    color: #666;
+    display: block;
+    float: left;
+    font-weight: 900;
+    height: 8px;
+    margin-right: 5px;
+    padding: 4px 4px 5px 5px;
+    position: relative;
+    top: 1px;
+    width: 7px;
+}
+
+.ding a:hover {
+  background-color: #D95700;
+  color: #fff;
+  text-decoration: none;
 }
 
 </style>
@@ -53,10 +79,15 @@ p.note {
 <ul id="answerlist">
 {% for answer in answers %}
 	<li class="">
-		<p>
-			{{ answer.answer }}<br/>
-			<strong>Answered by <a href="{% url profile answer.owner.user.username %}">{{ answer.owner.user.username }}</a></strong>
-		</p>	
+		<p>{{ answer.answer }}</p>
+		<span class="small">
+			{% if request.user.get_profile in answer.voters.all %}{% else %}
+				<span class="ding"><a href="{% url answer_vote answer.id %}">^</a></span>
+			{% endif %}
+			<span class="votes">{{ answer.votes }} point{{ answer.votes|pluralize }}</span> -
+			<strong>Answered by <a href="{% url profile answer.owner.user.username %}">{{ answer.owner.user.username }}</a></strong> - 
+			{{ answer.date_added|timesince }} ago
+		</span>
 	</li>
 {% endfor %}
 

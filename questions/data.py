@@ -39,7 +39,7 @@ def find_questions(q=None, skip_photoless=False, city=None,
     string_attributes = ('size_uk','designer', 'label', 'material', 'colour', 'title')
     
     if qs is None:
-        qs = NewQuestion.objects.filter(city=city)
+        qs = Question.objects.filter(is_published=True)
 
     if q is not None:
             
@@ -86,12 +86,12 @@ def find_questions(q=None, skip_photoless=False, city=None,
                 
                 
                 if qset is None:
-                    qset = Q(question__iexact=word) | \
-                           Q(description__iexact=word)
+                    qset = Q(question__icontains=word) | \
+                           Q(description__icontains=word)
                 else:
                     qset = qset | \
-                           Q(question__iexact=word) | \
-                           Q(description__iexact=word)
+                           Q(question__icontains=word) | \
+                           Q(description__icontains=word)
 
                 qs = qs.filter(qset)
         

@@ -149,15 +149,16 @@ def add_answer(request, questionslug):
     return render(request, "questions/forms/add_answer.html", locals())
 
 @login_required
-def vote(request, id):
+def answer_vote(request, id):
     answer = get_object_or_404(Answer, pk=id) 
-    answer.vote_count += 1
+    answer.votes += 1
+    answer.voters.add(request.user.get_profile())
     answer.save()
+    if answer.owner.karma is None:
+        answer.owner.karma = 1
+    else:
+        answer.owner.karma += 1
     
-    laowai = get_object_or_404(Laowai, user=request.user)
-    vote_obj = Vote.objects.create(
-        answer=answer,
-        laowai=laowai,
-    )
+    answer.owner.save()
     url = request.META.get('HTTP_REFERER','/')
     return HttpResponseRedirect(url)

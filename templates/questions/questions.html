@@ -6,25 +6,7 @@
 
 {% block extracss %}
 <style type="text/css">
-.ding a:link, .ding a:visited {
-    background-color: #e1e1e1;
-    color: #666;
-    display: block;
-    float: left;
-    font-weight: 900;
-    height: 8px;
-    margin-right: 5px;
-    padding: 0 4px 7px;
-    position: relative;
-    top: 2px;
-    width: 7px;
-}
 
-.ding a:hover {
-  background-color: #D95700;
-  color: #fff;
-  text-decoration: none;
-}
 </style>
 {% endblock %}
 
@@ -34,16 +16,15 @@
 
 {% block content %}
 
+{% include "snippets/search_bar.html" %}
+
 <ol id="newslist">
 {% for q in questions %}
 	<li>
 		<a href="{% url question q.slug %}">{{ q.question }}</a><br/>
 		<span class="small">
-			{% if request.user.get_profile in q.voters.all %}{% else %}
-			<span class="ding"><a href="">^</a></span>
-			{% endif %}
-			<span class="votes">{{ q.votes }} point{{ q.votes|pluralize }}</span> -
-			<a href="{% url profile q.owner.user.username %}">{{ q.owner }}</a> - 
+
+			<a href="{% url profile q.owner.user.username %}">Added by {{ q.owner }}</a> - 
 			{% if q.answers_count %}
 				<a href="{% url question q.slug %}">{{ q.answers_count }} answer{{ q.answers_count|pluralize }}</a> - 
 			{% else %}

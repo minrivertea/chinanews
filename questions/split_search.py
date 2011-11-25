@@ -27,7 +27,7 @@ split_search(searchstring [str or unicode],
 import re
 
 
-def split_search(q, keywords):
+def split_search(q, keywords=None):
     params = {}
     s = []
     
