@@ -29,13 +29,7 @@
 	{% block extra-head %}{% endblock %}
 
 	    <link rel="stylesheet" href="{% staticfile '/css/styles.css' %}" />
-	    <script type="text/javascript" src="{% staticfile '/js/jquery-1.6.min.js' %}"></script>
-	    {% if ga_is_on %}
-	    <script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>
-	    {% else %}
-	    <script src="/js/jquery.tools.min.js"></script>
-	    {% endif %}
-	    <script src="{% staticfile '/js/searchbar.js' %}"></script>
+
 	    <!--[if lte IE 6]>
 		<link rel="stylesheet" media="screen" type="text/css" href="{% staticfile '/css/ie6.css' %}" />
 		<![endif]-->
