@@ -64,6 +64,7 @@
 			<li><a href="{% url registration_register %}">Signup</a> / <a href="{% url auth_login %}">Login</a></li>
 			{% endif %}
 			<li><a {% if '/news/' in request.path %}class="selected"{% endif %} href="{% url news_home %}">News</a></li>
+			<li><a {% if '/questions/' in request.path %}class="selected"{% endif %} href="{% url questions_home %}">Questions</a></li>
 		</ul>
 		
 		<div id="add_button">	

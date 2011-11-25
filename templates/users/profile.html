@@ -10,6 +10,8 @@
 
 <p>{{ person.bio }}</p>
 
+<p><strong>Date joined:</strong> {{ person.date_joined|date:"M Y" }}</p>
+
 <p><strong>Karma:</strong> {{ person.karma }} point{{ person.karma|pluralize }}</p>
 
 

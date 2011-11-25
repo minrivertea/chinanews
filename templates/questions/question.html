@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}{{ question.question }}{% endblock %}
+
+{% block extracss %}
+<style type="text/css">
+
+</style>
+{% endblock %}
+
+{% block addbutton %}
+<a class="button" href="{% url add_question %}">Add Question</a>
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ question.question }}</h2>
+<p class="added-by-metadata">Added by <a href="{% url profile question.owner.user.username %}">{{ question.owner.name }}</a> {{ question.date|timesince }} ago</p>
+<p class="description"><em>{{ question.description }}</em></p>
+
+
+
+
+
+
+{% if answers %}
+<h3>Answers</h3>
+<ul id="answers">
+{% for answer in answers %}
+<li class="{% cycle 'grey' '' %}">
+<div class="votes">
+		{% if thing.voted %}
+			<a title="You voted for this!" class="thumbs-up voted" href=""><span>{{ answer.vote_count }}</span></a>
+		{% else %}
+			
+			<span>{{ answer.vote_count }}</span>
+			</a>
+		{% endif %}
+
+
+		</div>
+  <div class="left">
+
+	</div>
+	<div class="right">
+		
+		<p><a href="{% url profile answer.owner.user.username %}"><strong>{{ answer.owner.user.username }} says:</strong></a> {{ answer.answer }}</p>
+	</div>
+</li>
+{% endfor %}
+{% else %}
+<p><em>Nobody has answered this question yet!</em></p>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+	<a class="add-answer button" href="{% url add_answer question.slug %}">Add an answer</a>
+{% else %}
+	<p><em>You need to <a href="{% url auth_login %}">login</a> or <a href="{% url registration_register %}">register</a> to post an answer</em></p>
+{% endif %}
+
+{% endblock %}

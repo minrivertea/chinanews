@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load django_static %}
+
+{% block pagetitle %}Questions{% endblock %}
+
+{% block extracss %}
+<style type="text/css">
+
+</style>
+{% endblock %}
+
+{% block addbutton %}
+<a class="button" href="{% url add_question %}">Add Question</a>
+{% endblock %}
+
+{% block content %}
+
+<ol id="newslist">
+{% for q in questions %}
+	<li>
+		<a href="{% url question q.slug %}">{{ q.question }}</a>
+	</li>
+{% endfor %}
+</ol>
+
+{% endblock %}

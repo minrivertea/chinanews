@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}Add a question{% endblock %}
+
+{% block extracss %}
+<style type="text/css">
+
+.button {
+  font-size: 20px;	
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Answer this question:</h1>
+
+
+<h2>{{ question.question }}</h2>
+<p><strong>Question text:</strong> <em>{{ question.description }}</p>
+<form action="." method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit answer" class="button">
+</form>
+
+
+
+
+{% endblock %}

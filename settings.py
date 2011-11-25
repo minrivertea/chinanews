@@ -100,6 +100,7 @@ INSTALLED_APPS = (
     'django_static',
     'news',
     'users',
+    'questions',
     'registration',
     'custom_comments',
 )
