@@ -61,6 +61,25 @@ def question(request, questionslug):
         person = None
     
     answers = Answer.objects.filter(question=question)    
+    
+    if request.method == 'POST':
+        form = AddAnswerForm(request.POST)
+        if form.is_valid():
+            person = request.user.get_profile()
+            creation_args = {
+                'answer': form.cleaned_data['answer'],
+                'owner': person,
+                'question': question,	
+                'date_added': datetime.now(),
+            }
+            
+            answer = Answer.objects.create(**creation_args)
+            url = question.get_absolute_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AddAnswerForm()
+    
+    
     #answers_list = []
     #for answer in Answer.objects.filter(question=question):
     #    if answer in (x.answer for x in vote_list):
