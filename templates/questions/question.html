@@ -15,7 +15,7 @@
 {% block content %}
 
 <h2>{{ question.question }}</h2>
-<p class="added-by-metadata">Added by <a href="{% url profile question.owner.user.username %}">{{ question.owner.name }}</a> {{ question.date|timesince }} ago</p>
+<p class="added-by-metadata">Added by <a href="{% url profile question.owner.user.username %}">{{ question.owner.user.username }}</a> {{ question.date|timesince }} ago</p>
 <p class="description"><em>{{ question.description }}</em></p>
 
 
