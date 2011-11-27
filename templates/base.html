@@ -67,7 +67,7 @@
 	   		<li class="sitename"><a href="{% url home %}">{{ sitename }}</a></li>
 	   		
 	   		{% if request.user.is_authenticated %}
-	   		<li><a {% if '/profile/' in request.path %}class="selected"{% endif %} href="{% url profile request.user.username %}">Profile</a></li>
+	   		<li><a {% if '/profile/' in request.path %}class="selected"{% endif %} href="{% url user_profile %}">Your profile</a></li>
 	   		<li><a href="{% url auth_logout %}">Logout</a></li>
 	   		{% else %}
 			<li><a {% if '/register/' in request.path %}class="selected"{% endif %} href="{% url registration_register %}">Signup</a> / <a href="{% url auth_login %}" {% if '/login/' in request.path %}class="selected"{% endif %}>Login</a></li>
