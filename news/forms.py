@@ -7,6 +7,8 @@ from news.models import *
 
 
 class AddNewsForm(forms.Form):
-    url = forms.CharField(required=False)
-    title = forms.CharField(required=True)
-    text = forms.CharField(widget=forms.Textarea, required=False)
+    title = forms.CharField(required=True, label='* Title')
+    url = forms.CharField(required=False, label='URL', 
+        help_text="Use this if you're posting a link")
+    text = forms.CharField(widget=forms.Textarea, required=False, label='Text',
+        help_text="Use this if you're starting a discussion")

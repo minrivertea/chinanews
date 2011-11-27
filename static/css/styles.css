@@ -61,6 +61,10 @@ form label {
   top: 12px;
 }
 
+form label:hover {
+  cursor: pointer;	
+}
+
 form input {
   border: 1px solid #e1e1e1;
   padding: 10px;
