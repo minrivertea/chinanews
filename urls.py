@@ -5,10 +5,11 @@ from django.contrib import admin
 admin.autodiscover()
 
 from news.views import index
-from users.views import profile, all_posts
+from users.views import profile, all_posts, user_profile
 
 urlpatterns = patterns('',
     url(r'^$', index, name="home"),
+    url(r'^profile/$', user_profile, name="user_profile"),
     url(r'^profile/(?P<slug>[\w-]+)/all_posts$', all_posts, name="all_posts"),
     url(r'^profile/(?P<slug>[\w-]+)$', profile, name="profile"),
     (r'^news/', include('news.urls')),

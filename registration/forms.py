@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from users.models import RESERVED_USERNAMES
+
 
 # I put this on all required fields, because it's easier to pick up
 # on them with CSS or JavaScript if they have a class of "required"
@@ -48,8 +50,13 @@ class RegistrationForm(forms.Form):
         in use.
         
         """
+        
+        if self.cleaned_data['username'] in RESERVED_USERNAMES:
+            raise forms.ValidationError(_("Sorry, you can't use that username as it's reserved or not allowed."))
+        
         try:
             user = User.objects.get(username__iexact=self.cleaned_data['username'])
+            
         except User.DoesNotExist:
             return self.cleaned_data['username']
         raise forms.ValidationError(_("A user with that username already exists."))

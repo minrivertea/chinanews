@@ -4,7 +4,12 @@
 
 {% block extracss %}
 <style type="text/css">
-p.small {color: #666;}
+.small {color: #999;}
+.votes {
+  color: #333;
+  font-weight: bold;	
+}
+
 ul#answerlist {
   list-style-type: none;	
 }
@@ -87,7 +92,7 @@ p.note {
 			{% endif %}
 			{% endif %}
 			<span class="votes">{{ answer.votes }} point{{ answer.votes|pluralize }}</span> -
-			<strong>Answered by <a href="{% url profile answer.owner.user.username %}">{{ answer.owner.user.username }}</a></strong> - 
+			Answered by <a href="{% url profile answer.owner.user.username %}">{{ answer.owner.user.username }}</a> - 
 			{{ answer.date_added|timesince }} ago
 		</span>
 	</li>

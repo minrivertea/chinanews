@@ -101,6 +101,9 @@ def add_question(request):
     if request.method == 'POST':
         form = AddQuestionForm(request.POST)
         if form.is_valid():
+            # check if there's a similar question:
+                # do something here to check...
+            
             person = request.user.get_profile()
             slug = get_slugify(form.cleaned_data['question'])
             while(Question.objects.filter(slug__iexact=slug).count()):

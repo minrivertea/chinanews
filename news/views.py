@@ -88,6 +88,11 @@ def add_news(request):
     if request.method == 'POST':
         form = AddNewsForm(request.POST)
         if form.is_valid():
+            # check if there's a news item been posted already with the same URL
+            if [form.cleaned_data['url'] in x.url for x in NewsItem.objects.all()]:
+                news_items = NewsItem.objects.filter(url=form.cleaned_data['url'])
+                return render(request, "news/already_added.html", locals())
+                
             creation_args = {
                 'date': datetime.now(),	
                 'owner': request.user.get_profile(),
