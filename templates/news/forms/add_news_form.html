@@ -32,6 +32,9 @@ label span.help {
 
 <p>You can just add a URL (ie. if you're linking to another site) or add just text if it's a discussion. Either way, you have to add a title.</p>
 
+<p><strong>ps.</strong> if you're asking a question, go ask in the <a href="{% url add_question %}">'Questions' section</a></p>
+<br/>
+
 <form action="." method="post">
 {% csrf_token %}
 <p>
@@ -51,5 +54,7 @@ label span.help {
 
 <input class="button" type="submit" value="Submit">
 </form>
+
+
 
 {% endblock %}

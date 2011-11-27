@@ -13,7 +13,7 @@
 
 <h1>Add a question</h1>
 
-<p>You're adding a question for {{ city }} laowai - please try to be as descriptive as possible to get a good response. Remember any profanity, racist language or otherwise offensive questions will be removed.</p>
+<p>Ask any question you need to know - please try to be as descriptive as possible to get a good response.<br/> Remember any profanity, racist language or otherwise offensive questions will be removed.</p>
 
 {% if form.errors %}
 <p class="error">You must add a title for the question!</p>
@@ -22,14 +22,8 @@
 
 <form action="." method="post">
 	<div style='display:none;'>{% csrf_token %}</div>
-	<p><label for="id_question">Question:</label> <input id="id_question" type="text" name="question" maxlength="200" /></p>
-	<p><label for="id_description">Description:</label> <textarea id="id_description" rows="10" cols="40" name="description"></textarea></p>
+	{{ form.as_p }}
 	
-	<div style="display:none;">
-	<p><label for="id_city">City:</label> <select name="city" id="id_city">
-		<option selected="selected" value="{{ city.id }}">{{ city }}</option>
-	</select></p>
-	</div>
 
 	<input type="submit" value="Submit question" class="button">
 	</form>
