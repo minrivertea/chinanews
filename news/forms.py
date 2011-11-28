@@ -18,8 +18,9 @@ class AddNewsForm(forms.Form):
     
     def clean_url(self):
         # we just want to check that the URL is properly formed
-        data = urlparse(self.cleaned_data['url'])
+        url = self.cleaned_data['url']
+        data = urlparse(url)
         if not data.scheme:
-            data = "http://%s" % self.cleaned_data['url']
+            url = "http://%s" % url
                 
-        return data
+        return url

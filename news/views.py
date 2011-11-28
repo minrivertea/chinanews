@@ -30,8 +30,7 @@ def index(request):
     return render(request, "news/index.html", locals())
  
 def news_home(request):
-    news = NewsItem.objects.all().order_by('-date')[:20]
-    
+    news = NewsItem.objects.all()[:20]
     return render(request, "news/news_home.html", locals())   
 
 
