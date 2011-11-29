@@ -57,6 +57,13 @@ ul#comment-list li .meta {
   text-decoration: none;
 }
 
+ul#comment-list .ding a:link {
+  width: 8px;	
+  height: 10px;
+  padding-top: 1px;
+  top: 1px;
+}
+
 p.note {
   margin-top: 0;	
 }
@@ -115,7 +122,7 @@ span.blocked a.ding:hover {
 			<a title="Is this website censored for users in China by the Great Firewall?" class="ding" href="{% url news_blocked news_item.hashkey %}">^<a/>
 		{% else %}
 			Is this item blocked in China?
-			<a title="Is this website censored for users in China by the Great Firewall?" class="ding" href="{% url news_blocked news_item.hashkey %}">^<a/>
+			<a title="Is this website censored for users in China by the Great Firewall?" class="ding" href="{% url news_blocked news_item.hashkey %}">^</a>
 		{% endif %}
 		</span>
 	</p>
@@ -145,24 +152,26 @@ span.blocked a.ding:hover {
 	
 	</form>
 {% else %}
-<p><strong><a href="{% url auth_login %}">Login</a> or <a href="{% url registration_register %}">signup</a> to post comments</strong></p>
+	<p>
+		<strong><a href="{% url auth_login %}">Login</a> or <a href="{% url registration_register %}">signup</a> to post comments</strong>
+	</p>
 {% endif %}
 
 {% get_comment_list for news_item as comment_list %}
 <ul id="comment-list">
-{% for comment in comment_list %}
-	<li>
-		{{ comment.comment }}<br/>
-		<span class="meta">
-			{% if request.user.get_profile in comment.voters.all %}{% else %}
-				<span class="ding"><a href="{% url comment_ding comment.id %}">^</a></span>
-			{% endif %}
-			<span class="votes">{{ comment.votes }} point{{ comment.votes|pluralize }}</span> -
-			<a href="{% url profile comment.user_name %}">{{ comment.user_name }}</a> - 
-			{{ comment.submit_date|timesince }} ago
-		</span>
-	</li>
-{% endfor %}
+	{% for comment in comment_list %}
+		<li>
+			{{ comment.comment }}<br/>
+			<span class="meta">
+				{% if request.user.get_profile in comment.voters.all %}{% else %}
+					<span class="ding"><a href="{% url comment_ding comment.id %}">^</a></span>
+				{% endif %}
+				<span class="votes">{{ comment.votes }} point{{ comment.votes|pluralize }}</span> -
+				<a href="{% url profile comment.user_name %}">{{ comment.user_name }}</a> - 
+				{{ comment.submit_date|timesince }} ago
+			</span>
+		</li>
+	{% endfor %}
 </ul>
 
 {% endblock %}

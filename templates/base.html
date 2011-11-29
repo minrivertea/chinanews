@@ -70,7 +70,6 @@
 	   		<li><a {% ifequal '/profile/' request.path %}class="selected"{% endifequal %} href="{% url user_profile %}">Your profile</a></li>
 	   		{% else %}
 			<li><a {% if '/register/' in request.path %}class="selected"{% endif %} href="{% url registration_register %}">Signup</a> / <a href="{% url auth_login %}" {% if '/login/' in request.path %}class="selected"{% endif %}>Login</a></li>
-			
 			{% endif %}
 			<li><a href="/about/">About</a></li>
 			

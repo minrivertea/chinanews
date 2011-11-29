@@ -13,5 +13,5 @@ class CommentFormWithVote(CommentForm):
     def get_comment_create_data(self):
         # Use the data of the superclass, and add in the title field
         data = super(CommentFormWithVote, self).get_comment_create_data()
-        data['votes'] = self.cleaned_data['votes']
+        data['votes'] = 0
         return data
