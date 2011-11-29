@@ -11,10 +11,18 @@ class NewsItem(models.Model):
     text = models.TextField(blank=True, null=True)
     votes = models.PositiveIntegerField(default="0")
     hashkey = models.CharField(max_length=256)
-    voters = models.ManyToManyField(Person, db_index=True, related_name="Voters")
+    voters = models.ManyToManyField(Person, db_index=True, related_name="Voters", null=True, blank=True)
+    blocked = models.PositiveIntegerField(default="0")
     
     def __unicode__(self):
         return self.title
+        
+    def is_blocked(self):
+        blocked = False
+        if self.blocked > 3:
+            blocked = True
+        
+        return blocked
     
     class Meta:
         ordering = ['-date']

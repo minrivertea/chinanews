@@ -14,6 +14,11 @@
 
 <p><strong>Karma:</strong> {{ person.karma }} point{{ person.karma|pluralize }}</p>
 
+{% if request.user.is_authenticated %}
+	{% ifequal request.user.get_profile person %}
+		<p><a href="{% url auth_logout %}">Logout</a></p>
+	{% endifequal %}
+{% endif %}
 
 <p><strong>{% ifequal person request.user.get_profile %}Your{% else %}{{ person }}'s{% endifequal %} posts (latest 5) - <a href="{% url all_posts person.user.username %}">See all</a></strong></p>
 <ul>

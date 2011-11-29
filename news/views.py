@@ -54,7 +54,14 @@ def news_ding(request, hashkey):
     
     url = request.META.get('HTTP_REFERER','/')
     return HttpResponseRedirect(url)
-    
+
+@login_required
+def news_blocked(request, hashkey):
+    item = get_object_or_404(NewsItem, hashkey=hashkey)
+    item.blocked +=1
+    item.save()
+    url = request.META.get('HTTP_REFERER','/')
+    return HttpResponseRedirect(url) 
 
 @login_required
 def comment_ding(request, id):

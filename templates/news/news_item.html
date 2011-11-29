@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load django_static comments %}
+{% load comments %}
 
 {% block pagetitle %}{{ news_item.title }}{% endblock %}
 
@@ -43,12 +43,12 @@ ul#comment-list li .meta {
     display: block;
     float: left;
     font-weight: 900;
-    height: 8px;
+    height: 12px;
     margin-right: 5px;
-    padding: 0 4px 7px;
+    padding: 2px 4px 7px;
     position: relative;
-    top: 2px;
-    width: 7px;
+    top: 0px;
+    width: 9px;
 }
 
 .ding a:hover {
@@ -59,6 +59,33 @@ ul#comment-list li .meta {
 
 p.note {
   margin-top: 0;	
+}
+
+span.blocked, .blocked {
+  color: #999;
+  font-size: 12px;
+  float: right;	
+  position: relative;
+  top: -3px;
+}
+
+span.blocked .ding {
+    background-color: #e1e1e1;
+    color: #666;
+    font-weight: 900;
+    height: 13px;
+    float: left;
+    margin-right: 5px;
+    padding: 0px 4px 4px;
+    position: relative;
+    top: 2px;
+    width: 7px;	
+}
+
+span.blocked a.ding:hover {
+  background-color: #D95700;
+  color: #fff;
+  text-decoration: none;	
 }
 
 </style>
@@ -72,7 +99,28 @@ p.note {
 
 
 <h2>{{ news_item.title }}</h2>
-<p class=""><a href="{{ news_item.url }}">{{ news_item.url }}</a></p>
+	<p class="">
+		{% if request.user.is_authenticated %}
+		{% if request.user.get_profile in news_item.voters.all %}{% else %}
+			<span class="ding"><a href="{% url news_ding news_item.hashkey %}">^</a></span>
+		{% endif %}
+		{% endif %}
+		<span class="grey">{{ news_item.votes }} point{{ news_item.votes|pluralize }} - </span>
+		
+		
+		<a href="{{ news_item.url }}">{{ news_item.url }}</a> 
+		<span class="blocked">
+		{% if news_item.is_blocked %}
+			{{ news_item.blocked }} user{{ news_item.blocked|pluralize }} reported this URL is blocked in China
+			<a title="Is this website censored for users in China by the Great Firewall?" class="ding" href="{% url news_blocked news_item.hashkey %}">^<a/>
+		{% else %}
+			Is this item blocked in China?
+			<a title="Is this website censored for users in China by the Great Firewall?" class="ding" href="{% url news_blocked news_item.hashkey %}">^<a/>
+		{% endif %}
+		</span>
+	</p>
+
+
 
 {% if news_item.text %}<p>{{ news_item.text }}</p>{% endif %}
 

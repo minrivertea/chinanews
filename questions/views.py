@@ -141,6 +141,7 @@ def add_answer(request, questionslug):
                 'owner': person,
                 'question': question,	
                 'date_added': datetime.now(),
+                'votes': 1,
             }
             
             answer = Answer.objects.create(**creation_args)

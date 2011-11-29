@@ -28,6 +28,12 @@ span.votes {font-weight: bold; color: #666;}
   text-decoration: none;
 }
 
+img.blocked {
+  position: relative;
+  top: 1px;
+  left: 5px;	
+}
+
 </style>
 {% endblock %}
 
@@ -42,6 +48,9 @@ span.votes {font-weight: bold; color: #666;}
 <li>
 
 	{% if n.url %}<a href="{{ n.url }}">{{ n }}</a>{% else %}{{ n }}{% endif %}
+		{% if n.is_blocked %}
+		<img title="This website might be blocked by the Great Firewall" class="blocked" src="{% staticfile '/images/fire.png' %}">
+		{% endif %}
 	
 	<br/>
 	<span class="small">
@@ -59,6 +68,7 @@ span.votes {font-weight: bold; color: #666;}
 		<a href="{% url news_item n.hashkey %}">Discuss</a> - 
 		{% endif %}
 		{{ n.date|timesince }} ago
+		
 		
 		
 	</span>
