@@ -24,3 +24,5 @@ class AddNewsForm(forms.Form):
             url = "http://%s" % url
                 
         return url
+
+

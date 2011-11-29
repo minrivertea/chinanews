@@ -1,4 +1,5 @@
 from django.db import models
+from urlparse import urlparse
 
 from users.models import Person
 
@@ -23,6 +24,10 @@ class NewsItem(models.Model):
             blocked = True
         
         return blocked
+    
+    def show_url(self):
+        url = urlparse(self.url)
+        return url.netloc
     
     class Meta:
         ordering = ['-date']

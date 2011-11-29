@@ -34,6 +34,11 @@ img.blocked {
   left: 5px;	
 }
 
+span.url {
+  font-size: 11px;
+  font-weight: bold;	
+}
+
 </style>
 {% endblock %}
 
@@ -48,6 +53,7 @@ img.blocked {
 <li>
 
 	{% if n.url %}<a href="{{ n.url }}">{{ n }}</a>{% else %}{{ n }}{% endif %}
+		
 		{% if n.is_blocked %}
 		<img title="This website might be blocked by the Great Firewall" class="blocked" src="{% staticfile '/images/fire.png' %}">
 		{% endif %}
@@ -67,7 +73,7 @@ img.blocked {
 		{% else %}
 		<a href="{% url news_item n.hashkey %}">Discuss</a> - 
 		{% endif %}
-		{{ n.date|timesince }} ago
+		<span class="url">{{ n.show_url }}</span>
 		
 		
 		
