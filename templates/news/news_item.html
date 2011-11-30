@@ -4,6 +4,27 @@
 
 {% block pagetitle %}{{ news_item.title }}{% endblock %}
 
+
+{% block extrajs %}
+
+<script type="text/javascript" charset="utf-8">  
+function upVote(id) {    
+  	$('.' + id).css('display', 'none');
+  	$.ajax({
+  		type: "GET",
+  		url: '{% url news_ding_ajax %}',
+  		data: "xhr=true&id=" + id,	
+	    success: function(data) {
+	    	$('span.number').replaceWith(data);	
+	    }
+	});
+	return false;
+}
+</script>  
+
+{% endblock %}
+
+
 {% block extracss %}
 <style type="text/css">
 input.hidden, input#id_honeypot, input#id_timestamp, input#id_content_type, input#id_object_pk {
@@ -109,10 +130,10 @@ span.blocked a.ding:hover {
 	<p class="">
 		{% if request.user.is_authenticated %}
 		{% if request.user.get_profile in news_item.voters.all %}{% else %}
-			<span class="ding"><a href="{% url news_ding news_item.hashkey %}">^</a></span>
+			<span class="ding {{ news_item.id }}"><a href="#" onclick="upVote({{ news_item.id }})">^</a></span>
 		{% endif %}
 		{% endif %}
-		<span class="grey">{{ news_item.votes }} point{{ news_item.votes|pluralize }} - </span>
+		<span class="grey"><span class="number">{{ news_item.votes }}</span> point{{ news_item.votes|pluralize }} - </span>
 		
 		
 		<a href="{{ news_item.url }}">{{ news_item.url }}</a> 

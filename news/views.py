@@ -55,6 +55,16 @@ def news_ding(request, hashkey):
     url = request.META.get('HTTP_REFERER','/')
     return HttpResponseRedirect(url)
 
+def news_ding_ajax(request):
+    if request.GET.get('xhr'):
+        news_item = get_object_or_404(NewsItem, pk=request.GET.get('id'))
+        news_item.votes +=1
+        news_item.voters.add(request.user.get_profile())
+        news_item.save()
+        
+        return HttpResponse(news_item.votes)
+    return
+
 @login_required
 def news_blocked(request, hashkey):
     item = get_object_or_404(NewsItem, hashkey=hashkey)

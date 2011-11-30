@@ -4,6 +4,27 @@
 
 {% block pagetitle %}News{% endblock %}
 
+{% block extrajs %}
+
+<script type="text/javascript" charset="utf-8">  
+function upVote(id) {    
+  	$('li#' + id + ' .ding').css('display', 'none');
+  	$.ajax({
+  		type: "GET",
+  		url: '{% url news_ding_ajax %}',
+  		data: "xhr=true&id=" + id,	
+	    success: function(data) {
+	    	$('li#' + id + ' .number').replaceWith(data);	
+	    }
+	});
+	return false;
+}
+</script>  
+
+{% endblock %}
+
+
+
 {% block extracss %}
 <style type="text/css">
 span.votes {font-weight: bold; color: #666;}
@@ -50,7 +71,7 @@ span.url {
 
 <ol id="newslist">
 {% for n in news %}
-<li>
+<li id="{{ n.id }}">
 
 	{% if n.url %}<a href="{{ n.url }}">{{ n }}</a>{% else %}{{ n }}{% endif %}
 		
@@ -62,10 +83,10 @@ span.url {
 	<span class="small">
 		{% if request.user.is_authenticated %}
 		{% if request.user.get_profile in n.voters.all %}{% else %}
-			<span class="ding"><a href="{% url news_ding n.hashkey %}">^</a></span>
+			<span class="ding"><a href="#" onclick="upVote({{ n.id }})">^</a></span>
 		{% endif %}
 		{% endif %}
-		<span class="votes">{{ n.votes }} point{{ n.votes|pluralize }}</span> -
+		<span class="votes"><span class="number">{{ n.votes }}</span> point{{ n.votes|pluralize }}</span> -
 		<a href="{% url profile n.owner.user.username %}">{{ n.owner }}</a> - 
 		{% get_comment_count for n as comments_count %}
 		{% if comments_count %}
