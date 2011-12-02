@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 import re
 from urlparse import urlparse, urljoin
 
-
+from users.models import Person
 from news.models import *
+
 
 
 class AddNewsForm(forms.Form):
@@ -14,6 +15,8 @@ class AddNewsForm(forms.Form):
         help_text="Use this if you're posting a link")
     text = forms.CharField(widget=forms.Textarea, required=False, label='Text',
         help_text="Use this if you're starting a discussion")
+    as_user = forms.ModelChoiceField(required=False, queryset=Person.objects.filter(user__is_staff=True), 
+        label="As user")
     
     
     def clean_url(self):

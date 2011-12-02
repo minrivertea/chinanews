@@ -114,10 +114,15 @@ def add_news(request):
             if url in [x.url for x in NewsItem.objects.all()]:
                 news_items = NewsItem.objects.filter(url=form.cleaned_data['url'])
                 return render(request, "news/already_added.html", locals())
+            
+            if form.cleaned_data['as_user']:
+                owner = form.cleaned_data['as_user']
+            else:
+                owner = request.user.get_profile()
                 
             creation_args = {
                 'date': datetime.now(),	
-                'owner': request.user.get_profile(),
+                'owner': owner,
                 'title': form.cleaned_data['title'],
                 'url': form.cleaned_data['url'],
                 'text': form.cleaned_data['text'],

@@ -52,6 +52,13 @@ label span.help {
 	<textarea id="id_text" rows="10" cols="40" name="text"></textarea> 
 </p>
 
+{% if request.user.is_superuser %}
+<p>
+	<label class="">As user:</label>
+{{ form.as_user }}
+</p>
+{% endif %}
+
 <input class="button" type="submit" value="Submit">
 </form>
 
