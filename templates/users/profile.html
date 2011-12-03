@@ -8,7 +8,9 @@
 
 <h1>{{ person }}</h1>
 
+{% if person.bio %}
 <p>{{ person.bio|urlize }}</p>
+{% endif %}
 
 <p><strong>Date joined:</strong> {{ person.date_joined|date:"M Y" }}</p>
 
