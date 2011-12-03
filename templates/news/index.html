@@ -35,6 +35,7 @@ p.super-large {
 </style>
 {% endblock %}
 
+
 {% block content %}
 
 <p class="super-large">News, questions and answers covering the whole of China.</p>
@@ -48,4 +49,11 @@ p.super-large {
 	<h2><a href="{% url questions_home %}">Questions</a></h2>
 	<p>Ask questions about China, get answers</p>
 </div>
+
+{% if request.user.is_superuser %}
+<div class="block">
+	<h2>Invite user (admin only)</h2>
+	<p><a href="{% url invite_user %}">Invite a friend to the site</a></p>
+</div>
+{% endif %}
 {% endblock %}

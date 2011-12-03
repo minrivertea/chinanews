@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load django_static %}
+
+{% block pagetitle %}Edit your bio{% endblock %}
+
+{% block extracss %}
+<style type="text/css">
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Edit your bio</h1>
+
+<p>Write whatever you like about yourself. No HTML, links will be automatically converted.</p>
+<form action="" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<br/>
+<input class="button" type="submit" value="Submit">
+</form>
+{% endblock %}

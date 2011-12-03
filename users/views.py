@@ -17,7 +17,7 @@ from datetime import datetime
 
 from news.views import render
 from users.models import Person
-from users.forms import InviteUserForm, CompleteUserDetailsForm
+from users.forms import InviteUserForm, EditBioForm
 from registration.models import RegistrationProfile
 from registration.backends import get_backend
 from registration.forms import RegistrationForm
@@ -44,7 +44,25 @@ def all_posts(request, slug):
     from news.models import NewsItem
     posts = NewsItem.objects.filter(owner=person).order_by('-date')
     return render(request, "users/all_posts.html", locals())
+
+
+@login_required
+def edit_bio(request):
+    person = request.user.get_profile()
+    if request.method == 'POST':
+        form = EditBioForm(request.POST)
+        if form.is_valid():
+            person.bio = form.cleaned_data['bio']
+            person.save()
+            
+            url = reverse('user_profile')
+            return HttpResponseRedirect(url)
+
+    else:
+        form = EditBioForm(initial={'bio':person.bio})
     
+    
+    return render(request, 'users/forms/edit_bio.html', locals())
 
 @login_required
 def invite_user(request):

@@ -8,7 +8,7 @@
 
 <h1>{{ person }}</h1>
 
-<p>{{ person.bio }}</p>
+<p>{{ person.bio|urlize }}</p>
 
 <p><strong>Date joined:</strong> {{ person.date_joined|date:"M Y" }}</p>
 
@@ -17,6 +17,7 @@
 {% if request.user.is_authenticated %}
 	{% ifequal request.user.get_profile person %}
 		<p><a href="{% url auth_logout %}">Logout</a></p>
+		<p><a href="{% url edit_bio %}">Edit your bio</a></p>
 	{% endifequal %}
 {% endif %}
 
