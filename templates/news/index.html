@@ -50,9 +50,9 @@ p.super-large {
 	<p>Ask questions about China, get answers</p>
 </div>
 
-{% if request.user.is_superuser %}
+{% if request.user.is_authenticated %}
 <div class="block">
-	<h2>Invite user (admin only)</h2>
+	<h2>Invite a friend</h2>
 	<p><a href="{% url invite_user %}">Invite a friend to the site</a></p>
 </div>
 {% endif %}
