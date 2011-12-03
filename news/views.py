@@ -45,7 +45,7 @@ def news_ding(request, hashkey):
     item.voters.add(request.user.get_profile())
     item.save()
     
-    if item.owner.karma is None:
+    if item.owner.karma == "0":
         item.owner.karma = 1
     else:
         item.owner.karma += 1
