@@ -124,7 +124,7 @@ def activate_invited_user(request, key):
                 user=account.user,
                 email=account.user.email,
                 date_joined=datetime.now(),
-                karma="0",
+                karma=0,
             )
             
             # now we'll log the user in

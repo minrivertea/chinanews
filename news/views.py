@@ -62,6 +62,13 @@ def news_ding_ajax(request):
         news_item.voters.add(request.user.get_profile())
         news_item.save()
         
+        if news_item.owner.karma is None:
+            news_item.owner.karma = 1
+        else:
+            news_item.owner.karma +=1
+        
+        news_item.owner.save()
+        
         return HttpResponse(news_item.votes)
     return
 

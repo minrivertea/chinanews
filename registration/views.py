@@ -194,7 +194,7 @@ def register(request, backend, success_url=None, form_class=None,
                 email = new_user.email,
                 date_joined = datetime.now(),
                 user = new_user,
-                karma = "0",
+                karma = 0,
             )
             
             if success_url is None:
