@@ -3,7 +3,7 @@ You've been invited to join www.wheninchina.com by {{ inviter }} - just click th
 http://www.wheninchina.com/invite/{{ activation_key }}
 
 
-www.wheninchina.com is a news sharing site for people like you with an interest in China. Every day, users submit and rank news stories relevant to China so you have only one place to go to get all your China news.
+WhenInChina.com is a news sharing site for people like you with an interest in China. Every day, users submit and rank news stories relevant to China so you have only one place to go to get all your China news.
 
 
 ***
