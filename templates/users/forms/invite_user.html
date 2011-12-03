@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load django_static %}
+
+{% block extracss %}
+<style type="text/css">
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+{% if reg_profile %}
+	<h1>Success!!</h1>
+	<p><strong>We have invited your friend to join this site - they'll get an email with a unique activation key, and then they can join this site!</strong></p>
+{% else %}
+<h1>Invite a friend</h1>
+
+<p>Just add your friend's email address and we'll send them an email inviting them to the site.</p>
+<form action="." method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<br/>
+<input class="button" type="submit" value="Submit">
+</form>
+{% endif %}
+{% endblock %}

@@ -31,7 +31,7 @@ class Person(models.Model):
     
     # now comes all the profile stuff
     karma = models.PositiveIntegerField(blank=True, null=True)
-    bio = models.TextField()
+    bio = models.TextField(blank=True, null=True)
     
     def __unicode__(self):
         return self.user.username

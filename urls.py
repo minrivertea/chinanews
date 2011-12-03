@@ -5,10 +5,12 @@ from django.contrib import admin
 admin.autodiscover()
 
 from news.views import index
-from users.views import profile, all_posts, user_profile
+from users.views import profile, all_posts, user_profile, invite_user, activate_invited_user
 
 urlpatterns = patterns('',
     url(r'^$', index, name="home"),
+    url(r'^invite_user/$', invite_user, name="invite_user"),
+    url(r'^invite/(?P<key>[\w-]+)$', activate_invited_user, name="activate_invited_user"),
     url(r'^profile/$', user_profile, name="user_profile"),
     url(r'^profile/(?P<slug>[\w-]+)/all_posts$', all_posts, name="all_posts"),
     url(r'^profile/(?P<slug>[\w-]+)$', profile, name="profile"),

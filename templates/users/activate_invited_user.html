@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load django_static %}
+
+{% block pagetitle %}Activate your account{% endblock %}
+
+{% block content %}
+
+<h1>Activate your account</h1>
+
+<p>Hi there! Your account is ready to be activated, but first please choose a username and password for your account:</p>
+
+<form action="" method="post">
+{% csrf_token %}
+<p><label for="id_username">Choose a username:</label> <input id="id_username" type="text" class="required" name="username" maxlength="30" /></p>
+
+<p style="display:none;"><label for="id_email">Email address:</label> <input id="id_email" type="text" class="required" name="email" value="{{ account.user.email }}" maxlength="75" /></p>
+
+<p><label for="id_password1">Password:</label> <input id="id_password1" type="password" class="required" name="password1" /></p>
+<p><label for="id_password2">Password (confirm):</label> <input id="id_password2" type="password" class="required" name="password2" /></p>
+<input class="button" type="submit" value="Save details">
+</form>
+{% endblock %}
