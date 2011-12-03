@@ -75,7 +75,7 @@
 	   		<li><a {% if '/news/' in request.path %}class="selected"{% endif %} href="{% url news_home %}">News</a></li>
 			<li><a {% if '/questions/' in request.path %}class="selected"{% endif %} href="{% url questions_home %}">Questions</a></li>
 	   		{% if request.user.is_authenticated %}
-	   		<li><a {% ifequal '/profile/' request.path %}class="selected"{% endifequal %} href="{% url user_profile %}">Your profile</a></li>
+	   		<li><a {% ifequal '/profile/' request.path %}class="selected"{% endifequal %} href="{% url user_profile %}">Your profile {% if request.user.get_profile.karma %}({{ request.user.get_profile.karma }}){% endif %}</a></li>
 	   		{% else %}
 			<li><a {% if '/register/' in request.path %}class="selected"{% endif %} href="{% url registration_register %}">Signup</a> / <a href="{% url auth_login %}" {% if '/login/' in request.path %}class="selected"{% endif %}>Login</a></li>
 			{% endif %}
