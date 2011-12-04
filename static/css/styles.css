@@ -212,6 +212,13 @@ div#add_button {position: absolute; right: 0; top: 25px; }
   font-size: 20px;	
 }
 
+.flatpage ul {
+  margin-left: 30px;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.6em;	
+}
+
 #footer {
   display: block;
   float: left;
