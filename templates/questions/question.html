@@ -88,7 +88,7 @@ p.note {
 		<span class="small">
 			{% if request.user.is_authenticated %}
 			{% if request.user.get_profile in answer.voters.all %}{% else %}
-				<span class="ding"><a href="{% url answer_vote answer.id %}">^</a></span>
+				
 			{% endif %}
 			{% endif %}
 			<span class="votes">{{ answer.votes }} point{{ answer.votes|pluralize }}</span> -
