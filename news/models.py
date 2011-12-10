@@ -1,5 +1,6 @@
 from django.db import models
 from urlparse import urlparse
+from django.core.urlresolvers import reverse
 
 from users.models import Person
 
@@ -33,6 +34,10 @@ class NewsItem(models.Model):
         from custom_comments.models import CommentWithVote
         count = CommentWithVote.objects.filter(object_pk=self.pk).count()
         return count
+    
+    def get_absolute_url(self):
+        url = reverse('news_item', args=[self.hashkey])
+        return url
     
     class Meta:
         ordering = ['-date']

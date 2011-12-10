@@ -5,8 +5,13 @@ from django.contrib import admin
 admin.autodiscover()
 
 from news.views import index
+from news.feeds import LatestEntries
 from users.views import *
 from custom_comments.views import comment_reply
+
+feeds = {
+    'latest': LatestEntries,
+}
 
 urlpatterns = patterns('',
     url(r'^$', index, name="home"),
@@ -18,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^profile/(?P<slug>[\w-]+)/all_posts$', all_posts, name="all_posts"),
     url(r'^profile/(?P<slug>[\w-]+)$', profile, name="profile"),
     url(r'^comment/reply/(?P<hashkey>[\w-]+)/(?P<id>[\w-]+)$', comment_reply, name="comment_reply"),
+    url(r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}, name="latest_feed"),
     (r'^news/', include('news.urls')),
     (r'^questions/', include('questions.urls')),
     (r'^accounts/', include('registration.backends.default.urls')),

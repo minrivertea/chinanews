@@ -91,6 +91,31 @@ span.url {
   text-decoration: underline;	
 }
 
+#rss {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  background-color: #fff;
+  padding: 5px 5px 5px 10px;
+  border-top: 1px solid #e1e1e1;
+  border-right: 1px solid #e1e1e1;
+  border-left: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;	
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#rss img {
+  float: right;	
+}
+
+#rss span {
+  position: relative;
+  top: 6px;
+  margin-right: 5px;	
+}
+
 </style>
 {% endblock %}
 
@@ -99,6 +124,10 @@ span.url {
 {% endblock %}
 
 {% block content %}
+
+<div id="rss">
+<a href="/feeds/latest/"><span>Latest stories by RSS</span> <img src="/images/rss.png"/></a>
+</div>
 
 <div class="reminder" id="voting">
 <h4>Vote for the stories you like!</h4>

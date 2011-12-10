@@ -234,11 +234,13 @@ span.grey {
 .reminder {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 50px;
   width: 230px;
   background-color: #fff;
   padding: 15px 20px;
   border: 1px solid #e1e1e1;
+  border-color: #e1e1e1 #e1e1e1 #f1f1f1 #f1f1f1;
+  border-radius: 9px;
 }
 
 /* this is the foreground of the arrow */
@@ -252,7 +254,7 @@ span.grey {
         border-bottom: 20px solid transparent;
         border-left: 0;
         position: absolute;
-        top: 20px;
+        top: 40px;
         left: -19px;
         z-index: 2;
         margin-left: -1px;
@@ -266,9 +268,9 @@ span.grey {
         border-bottom: 20px solid transparent;         
         border-left: 0;
         border-top: 20px solid transparent;
-        border-right: 20px solid #d1d1d1;
+        border-right: 20px solid #e6e6e6;
         position: absolute;
-        top: 20px;
+        top: 40px;
         left: -21px;
         z-index: 1;
         margin-left: ;
