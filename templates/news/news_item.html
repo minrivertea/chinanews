@@ -51,9 +51,9 @@ ul#comment-list {
 }
 
 ul#comment-list li {
-  font-size: 0.9em;
+  font-size: 14px;
   line-height: 1.5em;
-  color: #666;	
+  color: #333;	
   margin-bottom: 20px;
 }
 
@@ -61,6 +61,17 @@ ul#comment-list li .meta {
   color: #666;
   font-size: 12px;
   font-weight: bold;	
+}
+
+ul.sublist {
+  margin-left: 40px;
+  margin-bottom: 40px;
+  list-style-type: none;
+  font-size: 14px;
+}
+
+ul.sublist li {
+  margin: 20px 0 10px 0;	
 }
 
 .ding a:link, .ding a:visited {
@@ -84,7 +95,7 @@ ul#comment-list li .meta {
 }
 
 ul#comment-list .ding a:link {
-  width: 8px;	
+  width: 6px;	
   height: 10px;
   padding-top: 1px;
   top: 1px;
@@ -119,6 +130,11 @@ span.blocked a.ding:hover {
   background-color: #D95700;
   color: #fff;
   text-decoration: none;	
+}
+
+.small {
+  font-size: 0.8em;
+  color: #666;	
 }
 
 </style>
@@ -188,14 +204,36 @@ span.blocked a.ding:hover {
 	{% for comment in comment_list %}
 		<li>
 			{{ comment.comment }}<br/>
-			<span class="meta">
+			<span class="small">
 				{% if request.user.get_profile in comment.voters.all %}{% else %}
 					<span class="ding"><a href="{% url comment_ding comment.id %}">^</a></span>
 				{% endif %}
 				<span class="votes">{{ comment.votes }} point{{ comment.votes|pluralize }}</span> -
 				<a href="{% url profile comment.user_name %}">{{ comment.user_name }}</a> - 
 				{{ comment.submit_date|timesince }} ago
+				{% if request.user.is_authenticated %}
+				 - <a href="{% url comment_reply news_item.hashkey comment.pk %}">Reply</a>
+				{% endif %}
 			</span>
+		
+		{% get_comment_list for comment as 2_comment_list %}
+		{% if 2_comment_list %}
+		<ul class="sublist">
+		{% for comment in 2_comment_list %}
+			<li>
+				{{ comment.comment }}<br/>
+				<span class="small">
+					{% if request.user.get_profile in comment.voters.all %}{% else %}
+					<span class="ding"><a href="{% url comment_ding comment.id %}">^</a></span>
+					{% endif %}
+					<span class="votes">{{ comment.votes }} point{{ comment.votes|pluralize }}</span> -
+					<a href="{% url profile comment.user_name %}">{{ comment.user_name }}</a> - 
+					{{ comment.submit_date|timesince }} ago
+				</span>
+			</li>
+		{% endfor %}
+		</ul>
+		{% endif %}
 		</li>
 	{% endfor %}
 </ul>

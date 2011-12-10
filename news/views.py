@@ -31,14 +31,17 @@ def _get_news(request):
 #   3. return the news
 #   The algorithm has to take account of the value of points, comments and then also 'freshness'
 
+# 	next question - how to find a 'minimum' barrier for today's stuff. 
+
     news_list = []
     for n in NewsItem.objects.all():
         time_difference = (datetime.now() - n.date)
-        time_score = (int(time_difference.days) + 1)
-        n.combined_count = ((n.votes + n.get_comment_count()) / time_score)
+        freshness = (int(time_difference.days) + 1) 
+        n.combined_count = ((n.votes + n.get_comment_count()) / freshness) 
         news_list.append(n)
 
     news = sorted(news_list, reverse=True, key=lambda n: n.combined_count)
+
     return news[:20]
 
 def index(request):

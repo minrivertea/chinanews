@@ -6,6 +6,7 @@ admin.autodiscover()
 
 from news.views import index
 from users.views import *
+from custom_comments.views import comment_reply
 
 urlpatterns = patterns('',
     url(r'^$', index, name="home"),
@@ -16,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^profile/$', user_profile, name="user_profile"),
     url(r'^profile/(?P<slug>[\w-]+)/all_posts$', all_posts, name="all_posts"),
     url(r'^profile/(?P<slug>[\w-]+)$', profile, name="profile"),
+    url(r'^comment/reply/(?P<hashkey>[\w-]+)/(?P<id>[\w-]+)$', comment_reply, name="comment_reply"),
     (r'^news/', include('news.urls')),
     (r'^questions/', include('questions.urls')),
     (r'^accounts/', include('registration.backends.default.urls')),
