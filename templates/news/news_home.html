@@ -19,6 +19,23 @@ function upVote(id) {
 	});
 	return false;
 }
+
+$('#seen_reminder').click(function() {
+	$('#voting').fadeOut(600);
+	$('#newslist').unbind();
+	$.ajax({
+      type: "GET",
+	  url: '{% url seen_voting_reminder %}',
+	  data: "xhr=true"
+	});
+});
+
+{% if request.user.get_profile.seen_voting_reminder %}{% else %}
+$('#newslist').hover(function() {
+	$('#voting').fadeIn(700);
+});
+{% endif %}
+
 </script>  
 
 {% endblock %}
@@ -29,7 +46,7 @@ function upVote(id) {
 <style type="text/css">
 span.votes {font-weight: bold; color: #666;}
 
-.ding a:link, .ding a:visited {
+.ding a:link, .ding a:visited, #voting span.ding {
     background-color: #e1e1e1;
     color: #666;
     display: block;
@@ -60,6 +77,20 @@ span.url {
   font-weight: bold;	
 }
 
+#voting {
+  display: none;	
+}
+
+#voting #seen_reminder {
+  color: #226d28;	
+  font-size: 11px;
+}
+
+#voting #seen_reminder:hover {
+  cursor: pointer;
+  text-decoration: underline;	
+}
+
 </style>
 {% endblock %}
 
@@ -68,6 +99,15 @@ span.url {
 {% endblock %}
 
 {% block content %}
+
+<div class="reminder" id="voting">
+<h4>Vote for the stories you like!</h4>
+<p><span class="ding">^</span> Ding the stories you like - they will stay on the homepage longer and other people are more likely to see them.</p>
+<p>
+<span id="seen_reminder">Don't show this again</span>
+</p>
+</div>
+
 
 <ol id="newslist">
 {% for n in news %}

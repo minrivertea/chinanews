@@ -230,3 +230,61 @@ div#add_button {position: absolute; right: 0; top: 25px; }
 span.grey {
   color: #666;	
 }
+
+.reminder {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 230px;
+  background-color: #fff;
+  padding: 15px 20px;
+  border: 1px solid #e1e1e1;
+}
+
+/* this is the foreground of the arrow */
+.reminder:before {
+        content: " ";
+        display: block;
+        width: 0;
+        height: 0;
+        border-right: 20px solid #fff;     
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        border-left: 0;
+        position: absolute;
+        top: 20px;
+        left: -19px;
+        z-index: 2;
+        margin-left: -1px;
+}
+
+.reminder:after {
+        content: " ";
+        display: block;
+        width: 0;
+        height: 0;
+        border-bottom: 20px solid transparent;         
+        border-left: 0;
+        border-top: 20px solid transparent;
+        border-right: 20px solid #d1d1d1;
+        position: absolute;
+        top: 20px;
+        left: -21px;
+        z-index: 1;
+        margin-left: ;
+}
+
+.reminder h4 {
+  margin: 0;
+  color: #226d28;	
+}
+
+.reminder p {
+  margin: 5px 0 0;
+  font-size: 13px;	
+}
+
+.reminder a {
+  font-size: 12px;	
+  color: #226d28;
+}

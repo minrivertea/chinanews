@@ -143,4 +143,13 @@ def activate_invited_user(request, key):
     else:
         form = RegistrationForm()
     return render(request, 'users/activate_invited_user.html', locals())     
-       
+
+
+def seen_voting_reminder(request):
+    if request.GET.get('xhr'):
+        person = request.user.get_profile()
+        person.seen_voting_reminder = True
+        person.save()
+        return True
+    else:
+        return False
