@@ -28,6 +28,11 @@ class NewsItem(models.Model):
     def show_url(self):
         url = urlparse(self.url)
         return url.netloc
+   
+    def get_comment_count(self):
+        from custom_comments.models import CommentWithVote
+        count = CommentWithVote.objects.filter(object_pk=self.pk).count()
+        return count
     
     class Meta:
         ordering = ['-date']

@@ -112,7 +112,6 @@ span.url {
 <ol id="newslist">
 {% for n in news %}
 <li id="{{ n.id }}">
-
 	{% if n.url %}<a href="{{ n.url }}">{{ n }}</a>{% else %}{{ n }}{% endif %}
 		
 		{% if n.is_blocked %}
