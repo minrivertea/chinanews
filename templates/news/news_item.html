@@ -20,6 +20,11 @@ function upVote(id) {
 	});
 	return false;
 }
+
+$('#comment_form').submit(function() {
+	$('#submit_comment').css('opacity', '0.5');
+	$('#submit_comment').unbind('click');
+});
 </script>  
 
 {% endblock %}
@@ -154,7 +159,7 @@ span.blocked a.ding:hover {
 
 {% if request.user.is_authenticated %}
 	{% get_comment_form for news_item as form %}
-	<form action="{% comment_form_target %}" method="post">
+	<form id="comment_form" action="{% comment_form_target %}" method="post">
 	{% csrf_token %}
 	
 	<textarea id="id_comment" rows="5" cols="30" name="comment"></textarea>
@@ -169,7 +174,7 @@ span.blocked a.ding:hover {
 	{{ form.security_hash }}
 	<input type="hidden" class="hidden" name="next" value="{% url news_item news_item.hashkey %}" />
 	
-	<input type="submit" value="Submit" class="button">
+	<input id="submit-comment" type="submit" value="Submit" class="button">
 	
 	</form>
 {% else %}

@@ -2,6 +2,15 @@
 
 {% block pagetitle %}{{ question.question }}{% endblock %}
 
+{% block extrajs %}
+<script type="text/javascript">
+$('#answer-form').submit(function() {
+	$('#submit-answer').css('opacity', '0.5');
+	$('#submit-answer').unbind('click');
+});
+</script>
+{% endblock %}
+
 {% block extracss %}
 <style type="text/css">
 .small {color: #999;}
@@ -67,11 +76,11 @@ p.note {
 
 
 {% if request.user.is_authenticated %}
-<form action="." method="post">
+<form id="answer-form" action="." method="post">
 {% csrf_token %}
 <textarea id="id_answer" rows="5" cols="40" name="answer"></textarea>
 <p class="note"><strong>&laquo; Add your answer</strong><br/>Please try to give as much information as you can and answer clearly.</p>
-<input type="submit" value="Submit answer" class="button">
+<input id="submit-answer" type="submit" value="Submit answer" class="button">
 </form>
 {% else %}
 <p><strong><a href="{% url auth_login %}">Login</a> or <a href="{% url registration_register %}">signup</a> to post an answer.</strong></p>
