@@ -112,12 +112,17 @@ span.url {
 
 #rss span {
   position: relative;
-  top: 6px;
+  top: 7px;
   margin-right: 5px;	
 }
 
 #rss a {
   color: #333;	
+}
+
+p.exp {
+  color: #999;
+  margin-top: 0;	
 }
 
 </style>
@@ -140,6 +145,10 @@ span.url {
 <span id="seen_reminder">Don't show this again</span>
 </p>
 </div>
+
+{% if latest %}
+<p class="exp"><strong>Latest news stories ordered by date:</strong></p>
+{% endif %}
 
 
 <ol id="newslist">

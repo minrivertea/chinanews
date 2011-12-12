@@ -24,34 +24,35 @@ def render(request, template, context_dict=None, **kwargs):
     )
 
 
-def _get_news(request):
+def _get_news(request, latest=None):
 
 #   1. filter all the news stories from the last week
 #   2. sort them by combined score
 #   3. return the news
-#   The algorithm has to take account of the value of points, comments and then also 'freshness'
+#   The algorithm has to take account of the value of points, comments and then also 'freshness' 
+    
+    if latest:
+        news = NewsItem.objects.all().order_by('-date')  
+    
+    else:   
+        news_list = []
+        for n in NewsItem.objects.all():
+            time_difference = (datetime.now() - n.date)
+            freshness = (int(time_difference.days) + 1) 
+            n.combined_count = ((n.votes + n.get_comment_count()) / freshness) 
+            news_list.append(n)
 
-# 	next question - how to find a 'minimum' barrier for today's stuff. 
-
-    news_list = []
-    for n in NewsItem.objects.all():
-        time_difference = (datetime.now() - n.date)
-        freshness = (int(time_difference.days) + 1) 
-        n.combined_count = ((n.votes + n.get_comment_count()) / freshness) 
-        news_list.append(n)
-
-    news = sorted(news_list, reverse=True, key=lambda n: n.combined_count)
+        news = sorted(news_list, reverse=True, key=lambda n: n.combined_count)
 
     return news[:20]
 
 def index(request):
     news = _get_news(request)
-    return render(request, "news/index.html", locals())
+    return render(request, "news/news_home.html", locals())
  
 def news_home(request):
-    news = _get_news(request)
-    #news = NewsItem.objects.all().order_by('-date')
-    # need an algorithm here for choosing the news
+    news = _get_news(request, latest=True)
+    latest = True
     return render(request, "news/news_home.html", locals())   
 
 
